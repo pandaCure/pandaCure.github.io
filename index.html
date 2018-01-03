@@ -88,7 +88,40 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/babel转换问题/" data-id="cjbz5v11t0000ifjfc06ypuv3" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2017/12/27/babel转换问题/" data-id="cjbz5y8hm0000kqjf526spbcf" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue-cli的一些看法和见解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/27/vue-cli的一些看法和见解/" class="article-date">
+  <time datetime="2017-12-26T17:43:54.596Z" itemprop="datePublished">2017-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>vue-cli的一些看法与分析<br>vue-cli,webpack,vue-loader<br>今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的</p>
+<p>先看一小段代码</p>
+<p>&lt;!DOCTYPE html&gt;</p>
+<html><br><head><br><meta charset="utf-8"><br><title>Vue 测试实例 - 菜鸟教程(runoob.com)</title><br><script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script><br></head><br><body><br><div id="app"><br><br></div><br><br><script><br>var Child = {<br>render:function(h){<br>return h(‘h1’,’我喜欢你’);<br>}<br>}<br><br>// 创建根实例<br>new Vue({<br>el: ‘#app’,<br>template: ‘<runoob></runoob>‘,<br>components: {<br>// <runoob> 将只在父模板可用<br>‘runoob’: Child<br>}<br>})<br></script><br></body><br></html>
+
+<p>如果你能看懂这段带，我想你离成功只差对webpack打包后的文件进行分析了，具体源码不在这里贴出，我只是提出和记录一下思路(我的看法)</p>
+<p>webpack通过vue-loader将每个组件分为三个部分，style,js,html,通过编译之后，scoped css是通过createBefore这个生命钩子函数<br>混合(minix)注入组件内，html编译模板，而js部分则是变为一个对象，对象和vue的实例一样，通过组件注入进去，就像上面代码child，同时<br>组件想异步加载，只要通过webpack的代码分割这个特性，通过动态的创建script这个标签异步加载这个组价 chunkID</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/27/vue-cli的一些看法和见解/" data-id="cjbz5y8i20003kqjf218jqwy3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -135,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/git无法提交问题的解决/" data-id="cjbz5v11z0001ifjfy95q1srt" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2017/12/27/git无法提交问题的解决/" data-id="cjbz5y8ht0001kqjfzvbfz2vb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -180,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/hello-world/" data-id="cjbz5v1250002ifjfa1hrw4aa" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2017/12/27/hello-world/" data-id="cjbz5y8hz0002kqjfdun2k8hn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -222,6 +255,10 @@
         
           <li>
             <a href="/2017/12/27/babel转换问题/">babel转换问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/27/vue-cli的一些看法和见解/">(no title)</a>
           </li>
         
           <li>

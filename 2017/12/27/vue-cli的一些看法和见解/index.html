@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="vue-cli的一些看法与分析vue-cli,webpack,vue-loader今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的 先看一小段代码 &amp;lt;!DOCTYPE html&amp;gt; Vue 测试实例 - 菜鸟教程(runoob.com)var Child = {render:function(h){retur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/12/27/vue-cli的一些看法和见解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="vue-cli的一些看法与分析vue-cli,webpack,vue-loader今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的 先看一小段代码 &amp;lt;!DOCTYPE html&amp;gt; Vue 测试实例 - 菜鸟教程(runoob.com)var Child = {render:function(h){retur">
+<meta property="og:updated_time" content="2018-01-03T14:33:41.458Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="vue-cli的一些看法与分析vue-cli,webpack,vue-loader今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的 先看一小段代码 &amp;lt;!DOCTYPE html&amp;gt; Vue 测试实例 - 菜鸟教程(runoob.com)var Child = {render:function(h){retur">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue-cli的一些看法和见解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/27/vue-cli的一些看法和见解/" class="article-date">
+  <time datetime="2017-12-26T17:43:54.596Z" itemprop="datePublished">2017-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>vue-cli的一些看法与分析<br>vue-cli,webpack,vue-loader<br>今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的</p>
+<p>先看一小段代码</p>
+<p>&lt;!DOCTYPE html&gt;</p>
+<html><br><head><br><meta charset="utf-8"><br><title>Vue 测试实例 - 菜鸟教程(runoob.com)</title><br><script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script><br></head><br><body><br><div id="app"><br><br></div><br><br><script><br>var Child = {<br>render:function(h){<br>return h(‘h1’,’我喜欢你’);<br>}<br>}<br><br>// 创建根实例<br>new Vue({<br>el: ‘#app’,<br>template: ‘<runoob></runoob>‘,<br>components: {<br>// <runoob> 将只在父模板可用<br>‘runoob’: Child<br>}<br>})<br></script><br></body><br></html>
+
+<p>如果你能看懂这段带，我想你离成功只差对webpack打包后的文件进行分析了，具体源码不在这里贴出，我只是提出和记录一下思路(我的看法)</p>
+<p>webpack通过vue-loader将每个组件分为三个部分，style,js,html,通过编译之后，scoped css是通过createBefore这个生命钩子函数<br>混合(minix)注入组件内，html编译模板，而js部分则是变为一个对象，对象和vue的实例一样，通过组件注入进去，就像上面代码child，同时<br>组件想异步加载，只要通过webpack的代码分割这个特性，通过动态的创建script这个标签异步加载这个组价 chunkID</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/27/vue-cli的一些看法和见解/" data-id="cjbz5y8i20003kqjf218jqwy3" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/27/babel转换问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          babel转换问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/27/git无法提交问题的解决/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">git无法提交问题的解决</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/27/babel转换问题/">babel转换问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/27/vue-cli的一些看法和见解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/27/git无法提交问题的解决/">git无法提交问题的解决</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/27/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
