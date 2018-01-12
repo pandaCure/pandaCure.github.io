@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,76 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-关于better-scroll垂直方向轮播图功能添加" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/12/关于better-scroll垂直方向轮播图功能添加/" class="article-date">
+  <time datetime="2018-01-12T15:27:09.852Z" itemprop="datePublished">2018-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="关于better-scroll垂直方向轮播图功能添加"><a href="#关于better-scroll垂直方向轮播图功能添加" class="headerlink" title="关于better-scroll垂直方向轮播图功能添加"></a>关于better-scroll垂直方向轮播图功能添加</h3><blockquote>
+<p>打开源码snap.js 添加几行代码就搞定</p>
+</blockquote>
+<ul>
+<li>开启loop、初始化为第一张图</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this.goToPage(this.currentPage.pageX ||</span><br><span class="line">this.hasHorizontalScroll ? initPage : 0, </span><br><span class="line">this.currentPage.pageY || this.hasVerticalScroll ? </span><br><span class="line">initPage : 0, 0)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实时监听轮播图滚动到第几张、进行切换</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">this.on(&apos;scrollEnd&apos;, () =&gt; &#123;</span><br><span class="line">      if (snap.loop &amp;&amp; this.hasHorizontalScroll) &#123;</span><br><span class="line">        if (this.currentPage.pageX === 0) &#123;</span><br><span class="line">          this.goToPage(this.pages.length - 2, this.currentPage.pageY, 0)</span><br><span class="line">        &#125;</span><br><span class="line">        if (this.currentPage.pageX === this.pages.length - 1) &#123;</span><br><span class="line">          this.goToPage(1, this.currentPage.pageY, 0)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; else if (snap.loop &amp;&amp; this.hasVerticalScroll) &#123;</span><br><span class="line">        if (this.currentPage.pageY === 0) &#123;</span><br><span class="line">          this.goToPage(this.currentPage.pageX, this.pages[0].length - 2, 0)</span><br><span class="line">        &#125;</span><br><span class="line">        if (this.currentPage.pageY === this.pages[0].length - 1) &#123;</span><br><span class="line">          this.goToPage(this.currentPage.pageX, 1, 0)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>有个疑问，就是这个轮播图是基于translationEnd这个事件，PC端貌似这个兼容性只能兼容到IE10、手机端应该没什么问题</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/12/关于better-scroll垂直方向轮播图功能添加/" data-id="cjcc2xmrd0003zajfkchfbnok" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于offset和getBoundingClientRect之间的总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/08/关于offset和getBoundingClientRect之间的总结/" class="article-date">
+  <time datetime="2018-01-08T01:20:15.069Z" itemprop="datePublished">2018-01-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="关于offset和getBoundingClientRect之间的总结"><a href="#关于offset和getBoundingClientRect之间的总结" class="headerlink" title="关于offset和getBoundingClientRect之间的总结"></a>关于offset和getBoundingClientRect之间的总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    * &#123;</span><br><span class="line">        padding: 0;</span><br><span class="line">        left: 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .a &#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        border: 4px solid black;</span><br><span class="line">        padding: 5px;</span><br><span class="line">        margin: 7px;</span><br><span class="line">        background-color: red;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .b &#123;</span><br><span class="line">        width: 20px;</span><br><span class="line">        height: 20px;</span><br><span class="line">        border: 1px solid green;</span><br><span class="line">        padding: 2px;</span><br><span class="line">        margin: 6px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .c &#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 200px;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        border: 4px solid black;</span><br><span class="line">        padding: 5px;</span><br><span class="line">        margin: 7px;</span><br><span class="line">        background-color: red;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;a&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;b&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;c&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;b&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;button id=&quot;go&quot;&gt;&lt;/button&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var oA = document.querySelector(&apos;.a&apos;);</span><br><span class="line">    var oB = document.querySelectorAll(&apos;.b&apos;);</span><br><span class="line">    var oC = document.querySelector(&apos;.c&apos;);</span><br><span class="line">    var button = document.getElementById(&apos;go&apos;);</span><br><span class="line">    document.addEventListener(&apos;click&apos;, function () &#123;</span><br><span class="line">        var val = oB[0].getBoundingClientRect();</span><br><span class="line">        for (let i in val) &#123;</span><br><span class="line">            console.log(`$&#123;i&#125;的值是$&#123;val[i]&#125;`)</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(`offsetLeft:$&#123;oB[0].offsetLeft&#125;---offsetWidth$&#123;oB[0].offsetWidth&#125;`);</span><br><span class="line">        var val = oB[1].getBoundingClientRect();</span><br><span class="line">        for (let i in val) &#123;</span><br><span class="line">            console.log(`$&#123;i&#125;的值是$&#123;val[i]&#125;`)</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(`offsetLeft:$&#123;oB[1].offsetLeft&#125;---offsetWidth$&#123;oB[1].offsetWidth&#125;`);</span><br><span class="line">    &#125;, false)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>他们之间的区别在于父级的元素position这个属性<br>如果父级属性是定位，无论是absolute，relative，fixed都会影响子节点的offset.left和top这个属性，其他的并不会影响<br>如果父级不是定位，二者值相等</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/08/关于offset和getBoundingClientRect之间的总结/" data-id="cjcc2xmrj0005zajfzc58pvqw" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-获取URL属性的API" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -158,7 +228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/04/获取URL属性的API/" data-id="cjc0nest50003utjfycrufl3a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/04/获取URL属性的API/" data-id="cjcc2xmrk0006zajffxmwke3x" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -195,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/babel转换问题/" data-id="cjc0nest70004utjf81q9snsh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/27/babel转换问题/" data-id="cjcc2xmr10000zajfozlg5pqb" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -225,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/vue-cli的一些看法和见解/" data-id="cjc0nessy0001utjfy09efl39" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/27/vue-cli的一些看法和见解/" data-id="cjcc2xmrf0004zajfl29v7uh4" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -272,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/git无法提交问题的解决/" data-id="cjc0nesst0000utjfl48594zp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/27/git无法提交问题的解决/" data-id="cjcc2xmr70001zajffdo4rw8l" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -317,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/hello-world/" data-id="cjc0nest30002utjfjh2r7sfb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/27/hello-world/" data-id="cjcc2xmrc0002zajfow5d3sbx" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -343,7 +413,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -353,9 +423,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/12/关于better-scroll垂直方向轮播图功能添加/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/关于offset和getBoundingClientRect之间的总结/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2018/01/04/获取URL属性的API/">(no title)</a>
@@ -367,14 +445,6 @@
         
           <li>
             <a href="/2017/12/27/vue-cli的一些看法和见解/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/27/git无法提交问题的解决/">git无法提交问题的解决</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/27/hello-world/">Hello World</a>
           </li>
         
       </ul>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于offset和getBoundingClientRect之间的总结12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;htm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2018/01/08/关于offset和getBoundingClientRect之间的总结/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="关于offset和getBoundingClientRect之间的总结12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;htm">
+<meta property="og:updated_time" content="2018-01-08T01:20:15.069Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="关于offset和getBoundingClientRect之间的总结12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;htm">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-关于offset和getBoundingClientRect之间的总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/08/关于offset和getBoundingClientRect之间的总结/" class="article-date">
+  <time datetime="2018-01-08T01:20:15.069Z" itemprop="datePublished">2018-01-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="关于offset和getBoundingClientRect之间的总结"><a href="#关于offset和getBoundingClientRect之间的总结" class="headerlink" title="关于offset和getBoundingClientRect之间的总结"></a>关于offset和getBoundingClientRect之间的总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    * &#123;</span><br><span class="line">        padding: 0;</span><br><span class="line">        left: 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .a &#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        border: 4px solid black;</span><br><span class="line">        padding: 5px;</span><br><span class="line">        margin: 7px;</span><br><span class="line">        background-color: red;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .b &#123;</span><br><span class="line">        width: 20px;</span><br><span class="line">        height: 20px;</span><br><span class="line">        border: 1px solid green;</span><br><span class="line">        padding: 2px;</span><br><span class="line">        margin: 6px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .c &#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 10px;</span><br><span class="line">        left: 200px;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        border: 4px solid black;</span><br><span class="line">        padding: 5px;</span><br><span class="line">        margin: 7px;</span><br><span class="line">        background-color: red;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;a&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;b&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;c&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;b&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;button id=&quot;go&quot;&gt;&lt;/button&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var oA = document.querySelector(&apos;.a&apos;);</span><br><span class="line">    var oB = document.querySelectorAll(&apos;.b&apos;);</span><br><span class="line">    var oC = document.querySelector(&apos;.c&apos;);</span><br><span class="line">    var button = document.getElementById(&apos;go&apos;);</span><br><span class="line">    document.addEventListener(&apos;click&apos;, function () &#123;</span><br><span class="line">        var val = oB[0].getBoundingClientRect();</span><br><span class="line">        for (let i in val) &#123;</span><br><span class="line">            console.log(`$&#123;i&#125;的值是$&#123;val[i]&#125;`)</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(`offsetLeft:$&#123;oB[0].offsetLeft&#125;---offsetWidth$&#123;oB[0].offsetWidth&#125;`);</span><br><span class="line">        var val = oB[1].getBoundingClientRect();</span><br><span class="line">        for (let i in val) &#123;</span><br><span class="line">            console.log(`$&#123;i&#125;的值是$&#123;val[i]&#125;`)</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(`offsetLeft:$&#123;oB[1].offsetLeft&#125;---offsetWidth$&#123;oB[1].offsetWidth&#125;`);</span><br><span class="line">    &#125;, false)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>他们之间的区别在于父级的元素position这个属性<br>如果父级属性是定位，无论是absolute，relative，fixed都会影响子节点的offset.left和top这个属性，其他的并不会影响<br>如果父级不是定位，二者值相等</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/08/关于offset和getBoundingClientRect之间的总结/" data-id="cjcc2xmrj0005zajfzc58pvqw" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/12/关于better-scroll垂直方向轮播图功能添加/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/04/获取URL属性的API/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/12/关于better-scroll垂直方向轮播图功能添加/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/关于offset和getBoundingClientRect之间的总结/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/04/获取URL属性的API/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/27/babel转换问题/">babel转换问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/27/vue-cli的一些看法和见解/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
