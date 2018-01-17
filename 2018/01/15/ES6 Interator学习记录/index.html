@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ES6 Interator学习记录话不多少，先了解一下，实现Interator内部原理 12345678910111213141516function createInterator(obj)&amp;#123;	var index = 0;	return &amp;#123;		next()&amp;#123;			return index &amp;lt; obj.length ? 					&amp;#123; 					valu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2018/01/15/ES6 Interator学习记录/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ES6 Interator学习记录话不多少，先了解一下，实现Interator内部原理 12345678910111213141516function createInterator(obj)&amp;#123;	var index = 0;	return &amp;#123;		next()&amp;#123;			return index &amp;lt; obj.length ? 					&amp;#123; 					valu">
+<meta property="og:updated_time" content="2018-01-15T15:09:18.824Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="ES6 Interator学习记录话不多少，先了解一下，实现Interator内部原理 12345678910111213141516function createInterator(obj)&amp;#123;	var index = 0;	return &amp;#123;		next()&amp;#123;			return index &amp;lt; obj.length ? 					&amp;#123; 					valu">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ES6 Interator学习记录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/15/ES6 Interator学习记录/" class="article-date">
+  <time datetime="2018-01-15T15:09:18.824Z" itemprop="datePublished">2018-01-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="ES6-Interator学习记录"><a href="#ES6-Interator学习记录" class="headerlink" title="ES6 Interator学习记录"></a>ES6 Interator学习记录</h3><p>话不多少，先了解一下，实现Interator内部原理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function createInterator(obj)&#123;</span><br><span class="line">	var index = 0;</span><br><span class="line">	return &#123;</span><br><span class="line">		next()&#123;</span><br><span class="line">			return index &lt; obj.length ? 					&#123; </span><br><span class="line">					value:obj[index++],</span><br><span class="line">					done:false</span><br><span class="line">				&#125; : </span><br><span class="line">				&#123;</span><br><span class="line">					value:undefined,</span><br><span class="line">					done:true</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">createInterator([1,2,3]).next()</span><br></pre></td></tr></table></figure>
+<p>通过上面代码我们可以发现，内部先创建一个指针指向数据的第一个数据，之后通过next()的方法移动指针，直到数据结束的位置<br>上述的机制与generator这个函数非常像<br>我们首先为对象创建一个Interator遍历器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">	* [Symbol.interator]()&#123;</span><br><span class="line">		yield a;</span><br><span class="line">		yield b</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>上述可以为对象创建一个具有interator接口的遍历器</p>
+<p>数组，字符串，类数组，Map，Set都具有interator这个接口<br>可以被break，return，continue打断，调用的是return(){}这个函数</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/15/ES6 Interator学习记录/" data-id="cjcj63u5a0000rljfs2mjinl5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/16/removeChild/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/15/研究VDOM基础知识的普及/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/16/removeChild/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/15/ES6 Interator学习记录/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/15/研究VDOM基础知识的普及/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/12/关于better-scroll垂直方向轮播图功能添加/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/关于offset和getBoundingClientRect之间的总结/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
