@@ -7,16 +7,12 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="vue-cli的一些看法与分析vue-cli,webpack,vue-loader今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的 先看一小段代码12345678910111213141516171819202122232425262728293031&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2017/12/27/vue-cli的一些看法和见解/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="vue-cli的一些看法与分析vue-cli,webpack,vue-loader今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的 先看一小段代码12345678910111213141516171819202122232425262728293031&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;">
-<meta property="og:updated_time" content="2018-01-03T15:16:26.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="vue-cli的一些看法与分析vue-cli,webpack,vue-loader今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的 先看一小段代码12345678910111213141516171819202122232425262728293031&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -63,7 +59,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-vue-cli的一些看法和见解" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-vue-cli的一些看法和见解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/12/27/vue-cli的一些看法和见解/" class="article-date">
   <time datetime="2017-12-26T17:43:54.596Z" itemprop="datePublished">2017-12-27</time>
@@ -89,28 +87,108 @@
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2017/12/27/babel转换问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          babel转换问题
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/12/27/git无法提交问题的解决/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">git无法提交问题的解决</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
+    <article id="post-git无法提交问题的解决" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/27/git无法提交问题的解决/" class="article-date">
+  <time datetime="2017-12-26T17:43:54.000Z" itemprop="datePublished">2017-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/27/git无法提交问题的解决/">git无法提交问题的解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、当你电脑已经绑定一个git账号的时候，去切换另一个账号的时候<br>1）切换账号<br>git config –global user.email [你的邮箱]<br>git config –global user.name [你的名字]<br>2）这个时候安流程去提交文件<br>git init =&gt; git add . =&gt; git status =&gt; git commit -m ‘’ =&gt; git remote add origin [你的地址]<br>=&gt; git pull origin master(基本上会用这句户报错的话，报的错里面会有pull这个关键字)<br>=&gt; git pull origin master –allow-unrelated-histories(当远程仓库与你本地仓库不相同的时候 可以尝试一下在add 这个时候改一下仓库的名字)<br>=&gt; git push -u(第一次加-u,以后不用) origin master</p>
+<p>3) 这个时候报错<br>remote: Permission to currentAccount/currentRepo denied to previousAccount.<br>fatal: unable to access ‘<a href="https://github.com/currentAccount/currentRepo/" target="_blank" rel="noopener">https://github.com/currentAccount/currentRepo/</a>‘: The requested URL returned error: 403</p>
+<p>这个时候的解决方法</p>
+<p>1.设置Git的user name和email<br>git config –global user.name “yourname”<br>git config –global user.email “youremail”</p>
+<p>2.生成SSH密钥<br>查看是否已经有了ssh密钥：cd ~/.ssh<br>如果没有密钥则不会有此文件夹，有则备份删除<br>生存密钥：<br>ssh-keygen -t rsa -C “haiyan.xu.vip@gmail.com”<br>按3个回车，密码为空。<br>Your identification has been saved in /home/tekkub/.ssh/id_rsa.<br>Your public key has been saved in /home/tekkub/.ssh/id_rsa.pub.<br>The key fingerprint is:<br>………………<br>最后得到了两个文件：id_rsa和id_rsa.pub<br>添加密钥到ssh：ssh-add 文件名,需要之前输入密码.</p>
+<p>在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。<br>打开<a href="https://github.com/,在设置中添加密钥" target="_blank" rel="noopener">https://github.com/,在设置中添加密钥</a></p>
+<p>到这，问题还没解决 git push 还是 还是报拒绝的错误</p>
+<p>3.查看账号信息<br>git config –list 返回的信息也是正确的</p>
+<p>4.验证权限<br>ssh -T git@github.com<br>这里可能需要选着yes 生成文件<br>返回的信息是<br>Hi lut! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+<p>5.再一次 设置远程路径 (ssh地址)<br>git remote set-url origin git@github.com:tinper-bee/formControl.git<br>然后再git push 我的代码 上github上看发现还是原来的账号提交的代码（因之前下载下来的代码是用之前的账号）<br>我在本地代码再做一次修改 然后提交 这次github上的账号显示正常</p>
+<p>4) 重复2的步骤 基本上解决所有问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/27/git无法提交问题的解决/" data-id="cjcm5c39n0002tmjfqn6xdnjw" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
 </article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/27/hello-world/" class="article-date">
+  <time datetime="2017-12-26T17:28:19.368Z" itemprop="datePublished">2017-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/27/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/27/hello-world/" data-id="cjcm5c39s0005tmjfhrrel74n" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </section>
         

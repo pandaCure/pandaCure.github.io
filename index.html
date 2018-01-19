@@ -61,6 +61,95 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-js 关于事件解绑的总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/20/js 关于事件解绑的总结/" class="article-date">
+  <time datetime="2018-01-19T16:34:43.709Z" itemprop="datePublished">2018-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="js-关于事件解绑的总结"><a href="#js-关于事件解绑的总结" class="headerlink" title="js 关于事件解绑的总结"></a>js 关于事件解绑的总结</h3><p>给一个事件绑定轻车熟路了，但是解绑往往是我们所忽略的</p>
+<p>给一个事件解绑调用的函数式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el.removeEventListener(event,fun,&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>这里的fun需要注意的是 要和绑定的也就是addEventListener是同一个fun,所以我们想要解绑不能引用匿名函数</p>
+<p>tip:</p>
+<blockquote>
+<p>bind()这个函数每次都会返回新的函数，所以这个函数不能绑定bind</p>
+</blockquote>
+<p>疑问：react里面绑定事件是不是不能移除？？？？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/20/js 关于事件解绑的总结/" data-id="cjcm5c39o0003tmjfeq4ruix7" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-检测IE版本的方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/18/检测IE版本的方法/" class="article-date">
+  <time datetime="2018-01-18T14:38:21.846Z" itemprop="datePublished">2018-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="检测IE版本的方法"><a href="#检测IE版本的方法" class="headerlink" title="检测IE版本的方法"></a>检测IE版本的方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var win = window;</span><br><span class="line">var doc = win.document;</span><br><span class="line">var input = doc.createElement (&quot;input&quot;);</span><br><span class="line"></span><br><span class="line">var ie = (function ()&#123;</span><br><span class="line">//&quot;!win.ActiveXObject&quot; is evaluated to true in IE11</span><br><span class="line">if (win.ActiveXObject === undefined) return null;</span><br><span class="line">if (!win.XMLHttpRequest) return 6;</span><br><span class="line">if (!doc.querySelector) return 7;</span><br><span class="line">if (!doc.addEventListener) return 8;</span><br><span class="line">if (!win.atob) return 9;</span><br><span class="line">//&quot;!doc.body.dataset&quot; is faster but the body is null when the DOM is not</span><br><span class="line">//ready. Anyway, an input tag needs to be created to check if IE is being</span><br><span class="line">//emulated</span><br><span class="line">if (!input.dataset) return 10;</span><br><span class="line">return 11;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/18/检测IE版本的方法/" data-id="cjcm5c39w0008tmjf3cgxum4q" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于pointer-events总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/17/关于pointer-events总结/" class="article-date">
+  <time datetime="2018-01-17T14:49:24.712Z" itemprop="datePublished">2018-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="关于pointer-events总结"><a href="#关于pointer-events总结" class="headerlink" title="关于pointer-events总结"></a>关于pointer-events总结</h3><p>最近公司要求做一个模仿IOS原生的选择城市三级联动，遇到一个问题，<br>水平或是垂直列表的两端（可能会有平滑滚动效果）有个白色的半透明渐变覆盖：但是中间是显示滚动部分，但是你不可能只点击中间部分，所以，我想到这个属性<br>对半透明覆盖元素应用pointer-events:none声明使其可以鼠标穿透，于是，半透明覆盖后面的滚动可以滚动了</p>
+<p>先介绍这个属性<br>这个是属性是在不使用js的情况下，禁止鼠标的一切行为</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/17/关于pointer-events总结/" data-id="cjcm5c39z000atmjf1vjvygdy" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-removeChild" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/16/removeChild/" class="article-date">
@@ -77,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/16/removeChild/" data-id="cjcj6blsf0004uhjfpd3194xl" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/16/removeChild/" data-id="cjcm5c39p0004tmjfdzaynnfv" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -109,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/15/ES6 Interator学习记录/" data-id="cjcj6blrv0000uhjftf5zonou" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/15/ES6 Interator学习记录/" data-id="cjcm5c39c0000tmjf3g9gli2a" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -193,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/15/研究VDOM基础知识的普及/" data-id="cjcj6blss0009uhjfgeddsz6t" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/15/研究VDOM基础知识的普及/" data-id="cjcm5c3a1000btmjfav2g50lr" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -233,7 +322,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/12/关于better-scroll垂直方向轮播图功能添加/" data-id="cjcj6blsm0006uhjf6mfbeb2l" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/12/关于better-scroll垂直方向轮播图功能添加/" data-id="cjcm5c39v0007tmjfobuo51q8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -263,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/08/关于offset和getBoundingClientRect之间的总结/" data-id="cjcj6blso0007uhjf61t2u1bi" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/08/关于offset和getBoundingClientRect之间的总结/" data-id="cjcm5c39y0009tmjfthkjv5vp" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -370,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/04/获取URL属性的API/" data-id="cjcj6blsq0008uhjfb4bys8iw" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/04/获取URL属性的API/" data-id="cjcm5c3a2000ctmjf1k74uzg3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -407,129 +496,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/babel转换问题/" data-id="cjcj6bls30001uhjfq205t6jz" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-vue-cli的一些看法和见解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/27/vue-cli的一些看法和见解/" class="article-date">
-  <time datetime="2017-12-26T17:43:54.596Z" itemprop="datePublished">2017-12-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>vue-cli的一些看法与分析<br>vue-cli,webpack,vue-loader<br>今天在用vue-cli的时候，vue配合webpack是怎么将每个组件加载到一起的，同时又是怎么配合webpack异步加载组件的</p>
-<p>先看一小段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Vue 测试实例 - 菜鸟教程(runoob.com)&lt;/title&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.bootcss.com/vue/2.2.2/vue.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">var Child = &#123;</span><br><span class="line">render:function(h)&#123;</span><br><span class="line">return h(&apos;h1&apos;,&apos;我喜欢你&apos;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建根实例</span><br><span class="line">new Vue(&#123;</span><br><span class="line">el: &apos;#app&apos;,</span><br><span class="line">template: &apos;&lt;runoob&gt;&lt;/runoob&gt;&apos;,</span><br><span class="line">components: &#123;</span><br><span class="line">// &lt;runoob&gt; 将只在父模板可用</span><br><span class="line">&apos;runoob&apos;: Child</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<p>如果你能看懂这段带，我想你离成功只差对webpack打包后的文件进行分析了，具体源码不在这里贴出，我只是提出和记录一下思路(我的看法)</p>
-<p>webpack通过vue-loader将每个组件分为三个部分，style,js,html,通过编译之后，scoped css是通过createBefore这个生命钩子函数<br>混合(minix)注入组件内，html编译模板，而js部分则是变为一个对象，对象和vue的实例一样，通过组件注入进去，就像上面代码child，同时<br>组件想异步加载，只要通过webpack的代码分割这个特性，通过动态的创建script这个标签异步加载这个组价 chunkID</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/vue-cli的一些看法和见解/" data-id="cjcj6blsj0005uhjfj8katczt" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git无法提交问题的解决" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/27/git无法提交问题的解决/" class="article-date">
-  <time datetime="2017-12-26T17:43:54.000Z" itemprop="datePublished">2017-12-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/27/git无法提交问题的解决/">git无法提交问题的解决</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、当你电脑已经绑定一个git账号的时候，去切换另一个账号的时候<br>1）切换账号<br>git config –global user.email [你的邮箱]<br>git config –global user.name [你的名字]<br>2）这个时候安流程去提交文件<br>git init =&gt; git add . =&gt; git status =&gt; git commit -m ‘’ =&gt; git remote add origin [你的地址]<br>=&gt; git pull origin master(基本上会用这句户报错的话，报的错里面会有pull这个关键字)<br>=&gt; git pull origin master –allow-unrelated-histories(当远程仓库与你本地仓库不相同的时候 可以尝试一下在add 这个时候改一下仓库的名字)<br>=&gt; git push -u(第一次加-u,以后不用) origin master</p>
-<p>3) 这个时候报错<br>remote: Permission to currentAccount/currentRepo denied to previousAccount.<br>fatal: unable to access ‘<a href="https://github.com/currentAccount/currentRepo/" target="_blank" rel="noopener">https://github.com/currentAccount/currentRepo/</a>‘: The requested URL returned error: 403</p>
-<p>这个时候的解决方法</p>
-<p>1.设置Git的user name和email<br>git config –global user.name “yourname”<br>git config –global user.email “youremail”</p>
-<p>2.生成SSH密钥<br>查看是否已经有了ssh密钥：cd ~/.ssh<br>如果没有密钥则不会有此文件夹，有则备份删除<br>生存密钥：<br>ssh-keygen -t rsa -C “haiyan.xu.vip@gmail.com”<br>按3个回车，密码为空。<br>Your identification has been saved in /home/tekkub/.ssh/id_rsa.<br>Your public key has been saved in /home/tekkub/.ssh/id_rsa.pub.<br>The key fingerprint is:<br>………………<br>最后得到了两个文件：id_rsa和id_rsa.pub<br>添加密钥到ssh：ssh-add 文件名,需要之前输入密码.</p>
-<p>在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。<br>打开<a href="https://github.com/,在设置中添加密钥" target="_blank" rel="noopener">https://github.com/,在设置中添加密钥</a></p>
-<p>到这，问题还没解决 git push 还是 还是报拒绝的错误</p>
-<p>3.查看账号信息<br>git config –list 返回的信息也是正确的</p>
-<p>4.验证权限<br>ssh -T git@github.com<br>这里可能需要选着yes 生成文件<br>返回的信息是<br>Hi lut! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
-<p>5.再一次 设置远程路径 (ssh地址)<br>git remote set-url origin git@github.com:tinper-bee/formControl.git<br>然后再git push 我的代码 上github上看发现还是原来的账号提交的代码（因之前下载下来的代码是用之前的账号）<br>我在本地代码再做一次修改 然后提交 这次github上的账号显示正常</p>
-<p>4) 重复2的步骤 基本上解决所有问题。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/git无法提交问题的解决/" data-id="cjcj6blsa0002uhjft1h5o0d0" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/27/hello-world/" class="article-date">
-  <time datetime="2017-12-26T17:28:19.368Z" itemprop="datePublished">2017-12-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/27/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/hello-world/" data-id="cjcj6blsc0003uhjf7bgvbevv" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2017/12/27/babel转换问题/" data-id="cjcm5c39i0001tmjf4p5fvzo7" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -540,6 +507,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
+  </nav>
 
 </section>
         
@@ -570,23 +542,23 @@
       <ul>
         
           <li>
+            <a href="/2018/01/20/js 关于事件解绑的总结/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/18/检测IE版本的方法/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/17/关于pointer-events总结/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/16/removeChild/">(no title)</a>
           </li>
         
           <li>
             <a href="/2018/01/15/ES6 Interator学习记录/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/15/研究VDOM基础知识的普及/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/12/关于better-scroll垂直方向轮播图功能添加/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/08/关于offset和getBoundingClientRect之间的总结/">(no title)</a>
           </li>
         
       </ul>
