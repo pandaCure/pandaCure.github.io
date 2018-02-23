@@ -5,18 +5,18 @@
   
 
   
-  <title>babel转换问题 | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于babel import和export转为问题在babel中使用env的时候，发现import转换失败，一直是import，这里导致babel并没有对模块进行转换，而是webpack进行的转换。想要babel对模块import等关键字进行转换，必须是有es-2015这个模块">
+  <meta name="description" content="js隐式转换总结 1、无论针对什么类型的数据（基本类型和对象类型）都会发生隐式转换的操作符有 + == 而 - * / 这三个操作符针对类型发生隐式转换，最终的转换结果只会是Number类型 2、隐式转换的顺序 Date类型的数据先调用toString这个方法，其他的都是先调用valueOf这个方法 3、valueOf针对不同类型返回的值类型（经过强制转换之后 new ….） 1、Number。S">
 <meta property="og:type" content="article">
-<meta property="og:title" content="babel转换问题">
-<meta property="og:url" content="http://yoursite.com/2017/12/27/babel转换问题/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2018/02/23/js隐式转换/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="关于babel import和export转为问题在babel中使用env的时候，发现import转换失败，一直是import，这里导致babel并没有对模块进行转换，而是webpack进行的转换。想要babel对模块import等关键字进行转换，必须是有es-2015这个模块">
-<meta property="og:updated_time" content="2017-12-27T15:55:58.155Z">
+<meta property="og:description" content="js隐式转换总结 1、无论针对什么类型的数据（基本类型和对象类型）都会发生隐式转换的操作符有 + == 而 - * / 这三个操作符针对类型发生隐式转换，最终的转换结果只会是Number类型 2、隐式转换的顺序 Date类型的数据先调用toString这个方法，其他的都是先调用valueOf这个方法 3、valueOf针对不同类型返回的值类型（经过强制转换之后 new ….） 1、Number。S">
+<meta property="og:updated_time" content="2018-02-23T08:27:27.914Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="babel转换问题">
-<meta name="twitter:description" content="关于babel import和export转为问题在babel中使用env的时候，发现import转换失败，一直是import，这里导致babel并没有对模块进行转换，而是webpack进行的转换。想要babel对模块import等关键字进行转换，必须是有es-2015这个模块">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="js隐式转换总结 1、无论针对什么类型的数据（基本类型和对象类型）都会发生隐式转换的操作符有 + == 而 - * / 这三个操作符针对类型发生隐式转换，最终的转换结果只会是Number类型 2、隐式转换的顺序 Date类型的数据先调用toString这个方法，其他的都是先调用valueOf这个方法 3、valueOf针对不同类型返回的值类型（经过强制转换之后 new ….） 1、Number。S">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -63,34 +63,37 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-babel转换问题" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-js隐式转换" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/12/27/babel转换问题/" class="article-date">
-  <time datetime="2017-12-27T15:55:02.000Z" itemprop="datePublished">2017-12-27</time>
+    <a href="/2018/02/23/js隐式转换/" class="article-date">
+  <time datetime="2018-02-23T08:27:27.914Z" itemprop="datePublished">2018-02-23</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      babel转换问题
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于babel import和export转为问题<br>在babel中使用env的时候，发现import转换失败，一直是import，这里导致babel并没有对模块进行转换，而是webpack进行的转换。<br>想要babel对模块import等关键字进行转换，必须是有es-2015这个模块</p>
+        <p>js隐式转换总结</p>
+<p>1、无论针对什么类型的数据（基本类型和对象类型）都会发生隐式转换的操作符有 + == 而 - * / 这三个操作符针对类型发生隐式转换，最终的转换结果只会是Number类型</p>
+<p>2、隐式转换的顺序 Date类型的数据先调用toString这个方法，其他的都是先调用valueOf这个方法</p>
+<p>3、valueOf针对不同类型返回的值类型（经过强制转换之后 new ….）</p>
+<pre><code>1、Number。String。Boolean返回的是值得强制转换原始数据
+2、Date返回的是毫秒值
+3、其他的返回的是自己本身
+</code></pre><p>4、toString针对不同类型返回的值类型（经过强制转换之后new ….）</p>
+<pre><code>1、Number。String。Boolean返回的强制转换成对象之后的值
+2、Date返回的是具体的时间
+3、function返回的是函数的本身
+4、Array返回的整个数组的值【1，2】=》 ‘1，2’
+5、其他的返回的都是对象的类型都是调用 Object.prototype.toString.call
+</code></pre><p>5、所有的隐式转换都会针对优先级来比较，有number的存在，所有的类型都会被转换成number，如果没有number的存在，有String的存在，那么其他的类型就会转成String</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/27/babel转换问题/" data-id="cjdzy0zka0001f2jftrkbgbw4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/23/js隐式转换/" data-id="cjdzy0zkg0003f2jf2llm8xnh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -99,7 +102,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/01/04/获取URL属性的API/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/02/23/flex/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -109,7 +112,7 @@
     </a>
   
   
-    <a href="/2017/12/27/vue-cli的一些看法和见解/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/02/02/关于line-height/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title"></div>
     </a>
